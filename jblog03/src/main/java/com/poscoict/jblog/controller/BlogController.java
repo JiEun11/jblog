@@ -1,18 +1,38 @@
 package com.poscoict.jblog.controller;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.poscoict.jblog.service.BlogService;
 
 @Controller
 @RequestMapping(value="/{id}")
 public class BlogController {
 	
+	@Autowired
+	private BlogService blogService;
+	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public String main() {
+	public String main(@PathVariable("id") String id, Model model) {
+		
+		Map<String,Object> map = blogService.getPost(id);
+		
+		model.addAttribute("map",map);
+		return "/blog/blog-main";
+	}
+	
+	@RequestMapping(value="/{cateNo}", method=RequestMethod.GET)
+	public String main(@PathVariable("no") Long cateNo) {
 		
 		return "/blog/blog-main";
 	}
+	
 	
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
 	public String basic() {

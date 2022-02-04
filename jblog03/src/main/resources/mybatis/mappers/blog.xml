@@ -8,5 +8,7 @@
 		]]>
 	</insert>
 
+	<select id="findById" parameterType="long" resultType="blogvo">
 	
+	</select>
 </mapper>
