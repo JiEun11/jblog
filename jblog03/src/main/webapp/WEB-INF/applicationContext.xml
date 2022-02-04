@@ -34,7 +34,7 @@
 	<context:annotation-config />
 
 	<context:component-scan
-		base-package="com.poscoict.mysite.service, com.poscoict.jblog.repository">
+		base-package="com.poscoict.jblog.service, com.poscoict.jblog.repository">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
