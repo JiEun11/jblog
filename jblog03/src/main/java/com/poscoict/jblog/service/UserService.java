@@ -26,7 +26,12 @@ public class UserService {
 		int resultBlog = blogRepository.insert(userVo);
 		int resultCate = categoryRepository.insert(userVo.getId());
 
-		return resultCate == 1;
+		return resultUser==1 && resultBlog==1 && resultCate == 1;
+	}
+
+	public UserVo getUser(String id, String password) {
+		
+		return userRepository.findByIdAndPassword(id,password);
 	}
 
 }
