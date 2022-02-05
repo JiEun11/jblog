@@ -18,8 +18,8 @@
 		<property name="url" value="jdbc:mysql://192.168.0.68:3307/jblog?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
 		<property name="username" value="jblog" />
 		<property name="password" value="jblog" />
-	</bean>
-
+	</bean> 
+	
 	<!-- MyBatis SqlSessionFactoryBean --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 		<property name="dataSource" ref="dataSource" /> 

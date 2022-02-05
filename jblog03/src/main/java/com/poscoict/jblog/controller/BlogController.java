@@ -40,21 +40,30 @@ public class BlogController {
 		
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> cateList = categoryService.getCategory(id);
+		for(CategoryVo cate : cateList) {
+			System.out.println("cate: " + cate);
+		}
 		List<PostVo> postList = postService.getPost(cateList.get(0).getNo());
-		PostVo postVo = postService.getRecent(cateList.get(0).getNo());
+		PostVo postOne = postService.getRecent(cateList.get(0).getNo());
 		servletContext.setAttribute("blogVo", blogVo);
 		servletContext.setAttribute("cateList", cateList);
-		servletContext.setAttribute("postList", postList);
-		servletContext.setAttribute("postOne", postVo);
-//		model.addAttribute("map",map);
+//		servletContext.setAttribute("postList", postList);
+//		servletContext.setAttribute("postOne", postVo);
+//		model.addAttribute("cateList",cateList);
+		model.addAttribute("postList",postList);
+		model.addAttribute("postOne",postOne);
 		return "/blog/blog-main";
 	}
 	
-	@RequestMapping(value="/{categoryNo}", method=RequestMethod.GET)
+	@RequestMapping(value="/{no}", method=RequestMethod.GET)
 	public String main(@PathVariable("no") Long categoryNo, Model model) {
-		List<PostVo> plist = postService.getPost(categoryNo);
-		
-		model.addAttribute("plist",plist);
+		List<PostVo> postList = postService.getPost(categoryNo);
+		PostVo postOne = postService.getRecent(categoryNo);
+		if(postList==null) {
+			System.out.println("없는 카테고리 번호");
+		}
+		model.addAttribute("postList",postList);
+		model.addAttribute("postOne",postOne);
 		return "/blog/blog-main";
 	}
 	
