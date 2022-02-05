@@ -23,7 +23,7 @@
 				</div>
 				<ul class="blog-list">
 				<c:forEach items="${postList }" var="postVo" varStatus="status" >
-					<li><a href="">${postVo.title }</a> <span>${postVo.regDate }</span>	</li>
+					<li><a href="${pageContext.request.contextPath}/${blogVo.userId }/${postVo.categoryNo }/${postVo.no }">${postVo.title }</a> <span>${postVo.regDate }</span>	</li>
 				</c:forEach>
 				</ul>
 			</div>

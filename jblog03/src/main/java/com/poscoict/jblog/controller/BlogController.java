@@ -67,6 +67,23 @@ public class BlogController {
 		return "/blog/blog-main";
 	}
 	
+	@RequestMapping(value="/{categoryNo}/{no}", method=RequestMethod.GET)
+	public String main(@PathVariable("id") String id, @PathVariable("categoryNo") Long categoryNo, @PathVariable("no") Long no, Model model) {
+		List<PostVo> postList = postService.getPost(categoryNo);
+		PostVo postOne = postService.getOnePost(no);
+		
+		if(postList==null) {
+			System.out.println("없는 카테고리 번호");
+		}
+		if(postOne==null) {
+			System.out.println("없는 포스트 번호");
+		}
+		
+		model.addAttribute("postList",postList);
+		model.addAttribute("postOne",postOne);
+		return "/blog/blog-main";
+	}
+	
 	
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
 	public String basic() {
