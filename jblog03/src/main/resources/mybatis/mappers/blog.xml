@@ -8,7 +8,9 @@
 		]]>
 	</insert>
 
-	<select id="findById" parameterType="long" resultType="blogvo">
-	
+	<select id="findById" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			SELECT title,logo,user_id FROM blog WHERE user_id=#{userId };
+		]]>
 	</select>
 </mapper>

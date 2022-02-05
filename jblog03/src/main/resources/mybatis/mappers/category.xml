@@ -7,4 +7,10 @@
 			INSERT INTO category VALUES(null, #{name }, #{description }, #{blogId } )
 		]]>
 	</insert>
+	
+	<select id="findById" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			SELECT no,name,description,blog_id FROM category WHERE blog_id=#{blogId } ORDER BY name ASC;
+		]]>
+	</select>
 </mapper>

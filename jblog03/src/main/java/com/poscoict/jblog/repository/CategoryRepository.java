@@ -1,5 +1,7 @@
 package com.poscoict.jblog.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,10 @@ public class CategoryRepository {
 		cateVo.setBlogId(id);
 		return sqlSession.insert("category.insert", cateVo);
 		
+	}
+
+	public List<CategoryVo> findById(String id) {
+		return sqlSession.selectList("category.findById", id);
 	}
 
 }
