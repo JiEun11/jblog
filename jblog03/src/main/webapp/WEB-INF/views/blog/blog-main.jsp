@@ -16,13 +16,13 @@
 			<div id="content">
 				<div class="blog-content">
 					
-					<h4>${map.postOne.title }</h4>
+					<h4>${postOne.title }</h4>
 					<p>
-						${map.postOne.contents }
+						${postOne.contents }
 					<p>
 				</div>
 				<ul class="blog-list">
-				<c:forEach items="${map.postList }" var="postVo" varStatus="status" >
+				<c:forEach items="${postList }" var="postVo" varStatus="status" >
 					<li><a href="">${postVo.title }</a> <span>${postVo.regDate }</span>	</li>
 				</c:forEach>
 				</ul>
@@ -36,11 +36,10 @@
 		</div>
 
 		<div id="navigation">
-		
 			<h2>카테고리</h2>
 			<ul>
-				<c:forEach items="${map.cateList }" var="cateVo" varStatus="status">
-					<li><a href="">${cateVo.name } ${cateVo.no }</a></li>
+				<c:forEach items="${cateList }" var="cateVo" varStatus="status">
+					<li><a href="${pageContext.request.contextPath}/${id}/${cateVo.no }">${cateVo.name } ${cateVo.no }</a></li>
 				</c:forEach>
 			</ul>
 		</div>
