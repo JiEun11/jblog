@@ -15,5 +15,11 @@ public class BlogService {
 	public BlogVo getBlog(String id) {  
 		return blogRepository.findById(id);
 	}
+
+	public boolean updateBlog(BlogVo blogVo) {
+		return blogRepository.updateBlogInfo(blogVo)==1;
+		
+	}
+	
 	
 }

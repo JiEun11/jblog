@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.service.CategoryService;
+import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.service.PostService;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
@@ -32,6 +35,9 @@ public class BlogController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private FileUploadService fileUploadService;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -94,8 +100,21 @@ public class BlogController {
 	
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
 	public String basic() {
-		
 		return "/blog/blog-admin-basic";
+	}
+	
+	@RequestMapping(value="/admin/basic", method=RequestMethod.POST)
+	public String basicUpdate(BlogVo blogVo, @RequestParam(value="logo-file")MultipartFile mutipartFile) {
+		
+		String logo = fileUploadService.restore(mutipartFile);
+		blogVo.setLogo(logo);
+		
+		if(logo!=null) {
+			blogService.updateBlog(blogVo);
+		}
+		servletContext.setAttribute("blogVo", blogVo);
+		
+		return "redirect:/blog/admin/basic";
 	}
 	
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
