@@ -10,7 +10,7 @@
 	
 	<select id="findById" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			SELECT no,name,description,blog_id FROM category WHERE blog_id=#{blogId } ORDER BY name ASC;
+			SELECT no,name,description,blog_id AS blogId FROM category WHERE blog_id=#{blogId } ORDER BY name ASC;
 		]]>
 	</select>
 </mapper>

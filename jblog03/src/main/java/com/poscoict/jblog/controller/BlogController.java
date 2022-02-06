@@ -20,7 +20,9 @@ import com.poscoict.jblog.vo.CategoryVo;
 import com.poscoict.jblog.vo.PostVo;
 
 @Controller
-@RequestMapping(value="/{id}")
+//@RequestMapping("/{blogId :(?!assets|image|search).*}")
+//@RequestMapping("/{id :(?!assets|images).*}")
+@RequestMapping("/{id}")
 public class BlogController {
 	
 	@Autowired
@@ -68,7 +70,7 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/{categoryNo}/{no}", method=RequestMethod.GET)
-	public String main(@PathVariable("id") String id, @PathVariable("categoryNo") Long categoryNo, @PathVariable("no") Long no, Model model) {
+	public String main(@PathVariable("categoryNo") Long categoryNo, @PathVariable("no") Long no, Model model) {
 		List<PostVo> postList = postService.getPost(categoryNo);
 		PostVo postOne = postService.getOnePost(no);
 		
@@ -87,6 +89,7 @@ public class BlogController {
 	
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
 	public String basic() {
+		
 		return "/blog/blog-admin-basic";
 	}
 	
