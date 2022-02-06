@@ -15,7 +15,6 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 
 	public List<CategoryVo> getCategory(String id) {
-		List<CategoryVo> cateList = categoryRepository.findById(id);
-		return cateList;
+		return categoryRepository.findAllById(id);
 	}
 }

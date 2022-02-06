@@ -24,8 +24,8 @@ public class CategoryRepository {
 		
 	}
 
-	public List<CategoryVo> findById(String id) {
-		return sqlSession.selectList("category.findById", id);
+	public List<CategoryVo> findAllById(String id) {
+		return sqlSession.selectList("category.findAllById", id);
 	}
 
 }

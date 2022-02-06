@@ -15,17 +15,15 @@ public class PostService {
 	private PostRepository postRepository;
 	
 	
-	public List<PostVo> getPost(Long categoryNo) {
-		List<PostVo> postList = postRepository.findByCateNo(categoryNo);
-		return postList;
+	public List<PostVo> getPostAll(Long categoryNo) {
+		return postRepository.findAllByCateNo(categoryNo);
 	}
 
-	public PostVo getRecent(Long categoryNo) {
-		PostVo postOne = postRepository.findRecentOne(categoryNo);
-		return postOne;
+	public PostVo getRecentOne(Long categoryNo) {
+		return postRepository.findRecentOne(categoryNo);
 	}
 	
 	public PostVo getOnePost(Long no) {
-		return postRepository.findByNo(no);
+		return postRepository.findOneByNo(no);
 	}
 }

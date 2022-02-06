@@ -14,7 +14,7 @@ import com.poscoict.jblog.exception.FileUploadException;
 public class FileUploadService {
 
 	private static String SAVE_PATH = "/Users/bella/posco/upload-images";
-	private static String URL_BASE = "/images";
+	private static String URL_BASE = "/assets/upload-images";
 	
 	public String restore(MultipartFile multipartFile) {
 		String url = null;

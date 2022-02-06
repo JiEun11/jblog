@@ -116,7 +116,7 @@ div#navigation ul a						{ font-weight:normal }
 /* extra */
 div#extra					{ background-color:#F9F9F9 }
 div#extra .blog-logo		{ margin:0 0 0 10px }
-div#extra .blog-logo img	{ width:150px }
+div#extra .blog-logo img	{ width:150px; height:200px }
 
 /* footer */
 div#footer		{ background:#F0F0F0; color:#666 }

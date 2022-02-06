@@ -1,13 +1,12 @@
 package com.poscoict.jblog.controller;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +20,8 @@ import com.poscoict.jblog.vo.PostVo;
 
 @Controller
 //@RequestMapping("/{blogId :(?!assets|image|search).*}")
-//@RequestMapping("/{id :(?!assets|images).*}")
-@RequestMapping("/{id}")
+@RequestMapping("/{id:(?!assets).*}")
+//@RequestMapping("/{id}")
 public class BlogController {
 	
 	@Autowired
@@ -37,52 +36,55 @@ public class BlogController {
 	@Autowired
 	private ServletContext servletContext;
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
-	public String main(@PathVariable("id") String id, Model model) {
+	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
+	public String main(@PathVariable("id") String id,
+						@PathVariable("pathNo1") Optional<Long> pathNo1,
+						@PathVariable("pathNo2") Optional<Long> pathNo2) {
+		Long categoryNo = 0L;
+		Long postNo = 0L;
+		List<CategoryVo> cateList = null;
+		List<PostVo> postList = null;
+		PostVo postOne = null;
 		
 		BlogVo blogVo = blogService.getBlog(id);
-		List<CategoryVo> cateList = categoryService.getCategory(id);
-		for(CategoryVo cate : cateList) {
-			System.out.println("cate: " + cate);
+		if(blogVo==null) {
+			return "redirect:/";	// 없는 id로 path 입력 시 메인으로 
 		}
-		List<PostVo> postList = postService.getPost(cateList.get(0).getNo());
-		PostVo postOne = postService.getRecent(cateList.get(0).getNo());
+		/* 여기까지 왔다는 건 id있다는 얘기이므로 category List 추출 */
+		cateList = categoryService.getCategory(id);	 
+		
+		if(pathNo2.isPresent()) {
+			categoryNo = pathNo1.get();
+			postNo = pathNo2.get();
+		}
+		
+		if(pathNo1.isPresent()) {
+			categoryNo = pathNo1.get();
+		}
+		/* categoryNo값으로 postList 부르기 */
+		postList = postService.getPostAll(categoryNo);	
+		System.out.println(categoryNo + " : categoryNo로 postList 부름 :" + postList);
+		if(postList.isEmpty()==true) {
+			// 없는 category번호였다면 제일 상단 카테고리번호로 postList 부르기 
+			postList = postService.getPostAll(cateList.get(0).getNo());
+			System.out.println("postList가 null이였어... 최근꺼 가져옴 " + postList);
+		}
+		
+		/* postNo 값으로 post 한 개 부르기 */
+		postOne = postService.getOnePost(postNo);
+		System.out.println(postNo + " : postNo값으로 post 하나 부르기 " + postOne);
+		if(postOne==null) {
+			// 없는 postNo였다면 제일 상단 post 보여주기 
+			postOne = postService.getRecentOne(cateList.get(0).getNo());
+			System.out.println("postNo가 null이였어..최근 post 가져옴 :  " + postOne);
+		}
 		servletContext.setAttribute("blogVo", blogVo);
 		servletContext.setAttribute("cateList", cateList);
-//		servletContext.setAttribute("postList", postList);
-//		servletContext.setAttribute("postOne", postVo);
+		servletContext.setAttribute("postList", postList);
+		servletContext.setAttribute("postOne", postOne);
 //		model.addAttribute("cateList",cateList);
-		model.addAttribute("postList",postList);
-		model.addAttribute("postOne",postOne);
-		return "/blog/blog-main";
-	}
-	
-	@RequestMapping(value="/{no}", method=RequestMethod.GET)
-	public String main(@PathVariable("no") Long categoryNo, Model model) {
-		List<PostVo> postList = postService.getPost(categoryNo);
-		PostVo postOne = postService.getRecent(categoryNo);
-		if(postList==null) {
-			System.out.println("없는 카테고리 번호");
-		}
-		model.addAttribute("postList",postList);
-		model.addAttribute("postOne",postOne);
-		return "/blog/blog-main";
-	}
-	
-	@RequestMapping(value="/{categoryNo}/{no}", method=RequestMethod.GET)
-	public String main(@PathVariable("categoryNo") Long categoryNo, @PathVariable("no") Long no, Model model) {
-		List<PostVo> postList = postService.getPost(categoryNo);
-		PostVo postOne = postService.getOnePost(no);
-		
-		if(postList==null) {
-			System.out.println("없는 카테고리 번호");
-		}
-		if(postOne==null) {
-			System.out.println("없는 포스트 번호");
-		}
-		
-		model.addAttribute("postList",postList);
-		model.addAttribute("postOne",postOne);
+//		model.addAttribute("postList",postList);
+//		model.addAttribute("postOne",postOne);
 		return "/blog/blog-main";
 	}
 	

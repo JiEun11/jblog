@@ -8,7 +8,7 @@
 		]]>
 	</insert>
 	
-	<select id="findById" parameterType="string" resultType="categoryvo">
+	<select id="findAllById" parameterType="string" resultType="categoryvo">
 		<![CDATA[
 			SELECT no,name,description,blog_id AS blogId FROM category WHERE blog_id=#{blogId } ORDER BY name ASC;
 		]]>

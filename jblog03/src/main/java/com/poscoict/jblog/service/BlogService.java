@@ -13,8 +13,7 @@ public class BlogService {
 	private BlogRepository blogRepository;
 	
 	public BlogVo getBlog(String id) {  
-		BlogVo blogVo = blogRepository.findById(id);
-		return blogVo;
+		return blogRepository.findById(id);
 	}
 	
 }

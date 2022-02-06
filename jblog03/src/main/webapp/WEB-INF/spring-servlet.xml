@@ -32,7 +32,7 @@
 	<!-- Interceptors -->
 
 	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/images/**" location="file:/Users/bella/posco/upload-images/" />
+	<mvc:resources mapping="/assets/upload-images/**" location="file:/Users/bella/posco/upload-images/" />
 
 	<!-- MessageSource -->
 	

@@ -19,7 +19,7 @@
 					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/category">카테고리</a></li>
 					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/write">글작성</a></li>
 				</ul>
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath}/${blogVo.userId }/admin/basic/update" method="post">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
@@ -27,7 +27,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/images/202214102733647.jpeg"></td>      			
+			      			<td><img src="${pageContext.request.contextPath}${blogVo.logo }"></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

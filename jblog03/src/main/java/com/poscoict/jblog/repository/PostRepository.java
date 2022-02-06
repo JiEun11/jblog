@@ -15,9 +15,9 @@ public class PostRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<PostVo> findByCateNo(Long categoryNo) {
+	public List<PostVo> findAllByCateNo(Long categoryNo) {
 		
-		return sqlSession.selectList("post.findByCateNo",categoryNo);
+		return sqlSession.selectList("post.findAllByCateNo",categoryNo);
 	}
 
 	public PostVo findRecentOne(Long categoryNo) {
@@ -25,8 +25,8 @@ public class PostRepository {
 		return sqlSession.selectOne("post.findRecentOne", categoryNo);
 	}
 	
-	public PostVo findByNo(Long no) {
-		return sqlSession.selectOne("post.findByNo", no);
+	public PostVo findOneByNo(Long no) {
+		return sqlSession.selectOne("post.findOneByNo", no);
 	}
 	
 }
