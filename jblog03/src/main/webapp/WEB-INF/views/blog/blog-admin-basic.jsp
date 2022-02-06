@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link href="${pageContext.request.contextPath}/assets/css/jblog.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -16,18 +16,18 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="">카테고리</a></li>
-					<li><a href="">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/write">글작성</a></li>
 				</ul>
 				<form action="" method="post">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="title"></td>
+			      			<td><input type="text" size="40" name="title" value="${blogVo.title }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>      			
+			      			<td><img src="${pageContext.request.contextPath}/images/202214102733647.jpeg"></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link href="${pageContext.request.contextPath}/assets/css/jblog.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -15,9 +15,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/basic">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/write">글작성</a></li>
 				</ul>
 		      	<table class="admin-cat">
 		      		<tr>

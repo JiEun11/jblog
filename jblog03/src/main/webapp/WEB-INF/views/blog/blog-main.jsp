@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link href="${pageContext.request.contextPath}/assets/css/jblog.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -31,7 +31,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				<img src="${pageContext.request.contextPath}${blogVo.logo }">
 			</div>
 		</div>
 
