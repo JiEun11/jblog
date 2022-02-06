@@ -27,27 +27,16 @@
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
-					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>  
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+					
+						<c:forEach items="${cateList }" var="catevo" varStatus="status">
+						<tr>
+							<td>${catevo.no }</td>
+							<td>${catevo.name }</td>
+							<td>10</td>
+							<td>${catevo.description }</td>
+							<td><a href="${pageContext.request.contextPath }/${authUser.id }/category/delete" class="del"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+						</tr>  
+						</c:forEach>					  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
