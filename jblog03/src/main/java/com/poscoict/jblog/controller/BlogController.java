@@ -61,22 +61,25 @@ public class BlogController {
 		if(pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
 		}
+		System.out.println("categoryNo : " + categoryNo);
+		System.out.println("postNo : " + postNo);
+		
 		/* categoryNo값으로 postList 부르기 */
 		postList = postService.getPostAll(categoryNo);	
-		System.out.println(categoryNo + " : categoryNo로 postList 부름 :" + postList);
-		if(postList.isEmpty()==true) {
+		System.out.println(categoryNo + " : categoryNo 로 postList 부름 " + postList);
+		if(postList.isEmpty()) {
 			// 없는 category번호였다면 제일 상단 카테고리번호로 postList 부르기 
 			postList = postService.getPostAll(cateList.get(0).getNo());
-			System.out.println("postList가 null이였어... 최근꺼 가져옴 " + postList);
+			System.out.println("postList가 null이었네!!!!!최근꺼 가져와 " +postList);
 		}
 		
 		/* postNo 값으로 post 한 개 부르기 */
 		postOne = postService.getOnePost(postNo);
-		System.out.println(postNo + " : postNo값으로 post 하나 부르기 " + postOne);
+		System.out.println(postNo+" : postNo로 postOne 부름 " + postOne);
 		if(postOne==null) {
 			// 없는 postNo였다면 제일 상단 post 보여주기 
-			postOne = postService.getRecentOne(cateList.get(0).getNo());
-			System.out.println("postNo가 null이였어..최근 post 가져옴 :  " + postOne);
+			postOne = postService.getRecentOne(postList.get(0).getCategoryNo());
+			System.out.println("postOne이 null이었네!!!!최근꺼 가져와 " + postOne);
 		}
 		servletContext.setAttribute("blogVo", blogVo);
 		servletContext.setAttribute("cateList", cateList);
