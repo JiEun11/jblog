@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.poscoict.jblog.service.PostService;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
 import com.poscoict.jblog.vo.PostVo;
+import com.poscoict.jblog.vo.UserVo;
 
 @Controller
 //@RequestMapping("/{blogId :(?!assets|image|search).*}")
@@ -104,26 +106,49 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/admin/basic", method=RequestMethod.POST)
-	public String basicUpdate(BlogVo blogVo, @RequestParam(value="logo-file")MultipartFile mutipartFile) {
+	public String basicUpdate(HttpSession session, BlogVo blogVo, @RequestParam(value="logo-file")MultipartFile mutipartFile) {
 		
+		/* access control */
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser==null) {
+			return "redirect:/";
+		}
 		String logo = fileUploadService.restore(mutipartFile);
-		blogVo.setLogo(logo);
+		blogVo.setUserId(authUser.getId());
 		
 		if(logo!=null) {
+			blogVo.setLogo(logo);
 			blogService.updateBlog(blogVo);
 		}
 		servletContext.setAttribute("blogVo", blogVo);
-		
-		return "redirect:/blog/admin/basic";
+		return "redirect:/"+authUser.getId()+"/admin/basic";
 	}
 	
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
-	public String category() {
+	public String category(CategoryVo categoryVo) {
+		System.out.println(categoryVo);
 		return "/blog/blog-admin-category";
+	}
+	
+	@RequestMapping(value="/admin/category/add", method=RequestMethod.GET)
+	public String categoryAdd() {
+
+		return "/blog/blog-admin-category";
+	}
+	
+	@RequestMapping(value="/admin/category/delete", method=RequestMethod.GET)
+	public String categoryDelete() {
+
+		return "redirect:/blog/admin/category";
 	}
 	
 	@RequestMapping(value="/admin/write", method=RequestMethod.GET)
 	public String write() {
+		return "/blog/blog-admin-write";
+	}
+	
+	@RequestMapping(value="/admin/write", method=RequestMethod.POST)
+	public String writePost() {
 		return "/blog/blog-admin-write";
 	}
 	
