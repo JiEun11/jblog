@@ -17,13 +17,13 @@
 			<div id="content">
 				<div class="blog-content">
 					
-					<h4>${postOne.title }</h4>
+					<h4>${map.postOne.title }</h4>
 					<p>
-						${fn:replace(postOne.contents, newline, "<br/>") }
+						${fn:replace(map.postOne.contents, newline, "<br/>") }
 					<p>
-				</div>
+				</div>                                                                                                 
 				<ul class="blog-list">
-				<c:forEach items="${postList }" var="postVo" varStatus="status" >
+				<c:forEach items="${map.postList }" var="postVo" varStatus="status" >
 					<li><a href="${pageContext.request.contextPath}/${blogVo.userId }/${postVo.categoryNo }/${postVo.no }">${postVo.title }</a> <span>${postVo.regDate }</span>	</li>
 				</c:forEach>
 				</ul>
@@ -39,7 +39,7 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<c:forEach items="${cateList }" var="cateVo" varStatus="status">
+				<c:forEach items="${map.cateList }" var="cateVo" varStatus="status">
 					<li><a href="${pageContext.request.contextPath}/${blogVo.userId }/${cateVo.no }">${cateVo.name } ${cateVo.no }</a></li>
 				</c:forEach>
 			</ul>

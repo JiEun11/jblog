@@ -34,7 +34,7 @@
 							<td>${catevo.name }</td>
 							<td>${catevo.postCnt }</td>
 							<td>${catevo.description }</td>
-							<td><a href="${pageContext.request.contextPath }/${authUser.id }/category/delete" class="del"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+							<td><a href="${pageContext.request.contextPath }/${authUser.id }/admin/category/delete/${catevo.no }" class="del"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
 						</tr>  
 						</c:forEach>					  
 				</table>

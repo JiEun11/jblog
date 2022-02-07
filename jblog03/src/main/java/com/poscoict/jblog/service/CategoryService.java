@@ -17,4 +17,14 @@ public class CategoryService {
 	public List<CategoryVo> getCategory(String id) {
 		return categoryRepository.findAllById(id);
 	}
+
+	public boolean addCategory(CategoryVo categoryVo) {
+		return categoryRepository.addCategory(categoryVo)==1;
+		
+	}
+
+	public boolean deleteCategory(Long categoryNo) {
+		return categoryRepository.delete(categoryNo) == 1;
+		
+	}
 }
