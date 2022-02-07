@@ -174,7 +174,6 @@ public class BlogController {
 	@RequestMapping(value="/admin/category/delete/{no}", method=RequestMethod.GET)
 	public String categoryDelete(@PathVariable("id") String userId,
 				@PathVariable(value="no") Long categoryNo) {
-		
 		categoryService.deleteCategory(categoryNo);
 		return "redirect:/"+ userId +"/admin/category";
 	}
