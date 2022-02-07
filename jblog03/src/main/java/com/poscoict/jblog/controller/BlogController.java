@@ -131,13 +131,13 @@ public class BlogController {
 		if(authUser==null) {
 			return "redirect:/";
 		}
-		String logo = fileUploadService.restore(mutipartFile);
 		blogVo.setUserId(authUser.getId());
-		
+		String logo = fileUploadService.restore(mutipartFile);
+		System.out.println("logo >>>>>> "+logo);
 		if(logo!=null) {
 			blogVo.setLogo(logo);
-			blogService.updateBlog(blogVo);
 		}
+		blogService.updateBlog(blogVo);
 		System.out.println(".>>>>>>>>>>>> blogVo : "+blogVo);
 		model.addAttribute("blogVo", blogVo);
 		return "redirect:/"+authUser.getId()+"/admin/basic";
