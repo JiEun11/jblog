@@ -124,7 +124,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
-	public String category() {
+	public String category(@PathVariable("id") String userId) {
+		List<CategoryVo> cateList = categoryService.getCategory(userId);
+		
 //		List<CategoryVo> cateList = (List<CategoryVo>)servletContext.getAttribute("cateList");
 //		List<Integer> postCntList = postService.getPostCount(cateList);
 //		System.out.println(cateList.toString());

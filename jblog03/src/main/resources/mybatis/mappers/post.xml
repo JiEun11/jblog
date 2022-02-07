@@ -20,10 +20,4 @@
 		]]>
 	</select>
 	
-	<select id="countByNo" parameterType="long" resultType="integer">
-		<![CDATA[
-			SELECT COUNT(*) FROM post WHERE no=#{no };
-		]]>
-	</select>
-	
 </mapper>

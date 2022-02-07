@@ -43,8 +43,6 @@ public class PostVo {
 	public String toString() {
 		return "PostVo [no=" + no + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate
 				+ ", categoryNo=" + categoryNo + "]";
-	}
-	
-	
+	}	
 	
 }

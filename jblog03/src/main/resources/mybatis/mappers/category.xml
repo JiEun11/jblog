@@ -10,7 +10,7 @@
 	
 	<select id="findAllById" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			SELECT no,name,description,blog_id AS blogId FROM category WHERE blog_id=#{blogId } ORDER BY name ASC;
+			SELECT c.no, c.name, c.description, c.blog_id, COUNT(*) AS postCnt FROM category c LEFT JOIN post p ON c.`no` = p.category_no WHERE blog_id = #{blogId } GROUP BY c.no ORDER BY c.name ASC ;
 		]]>
 	</select>
 </mapper>
