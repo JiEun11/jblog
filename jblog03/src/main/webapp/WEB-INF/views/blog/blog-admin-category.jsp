@@ -38,8 +38,9 @@
 						</tr>  
 						</c:forEach>					  
 				</table>
-      	
+      			
       			<h4 class="n-c">새로운 카테고리 추가</h4>
+      			<form method="post" action="${pageContext.request.contextPath }/${authUser.id }/admin/category/add">
 		      	<table id="admin-cat-add">
 		      		<tr>
 		      			<td class="t">카테고리명</td>
@@ -47,13 +48,14 @@
 		      		</tr>
 		      		<tr>
 		      			<td class="t">설명</td>
-		      			<td><input type="text" name="desc"></td>
+		      			<td><input type="text" name="description"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
 		      			<td><input type="submit" value="카테고리 추가"></td>
 		      		</tr>      		      		
 		      	</table> 
+		      	</form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/include/blogFooter.jsp" />

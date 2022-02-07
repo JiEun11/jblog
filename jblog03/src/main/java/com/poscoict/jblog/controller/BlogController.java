@@ -126,14 +126,16 @@ public class BlogController {
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
 	public String category() {
 //		List<CategoryVo> cateList = (List<CategoryVo>)servletContext.getAttribute("cateList");
+//		List<Integer> postCntList = postService.getPostCount(cateList);
 //		System.out.println(cateList.toString());
 		return "/blog/blog-admin-category";
 	}
 	
-	@RequestMapping(value="/admin/category/add", method=RequestMethod.GET)
-	public String categoryAdd() {
-
-		return "/blog/blog-admin-category";
+	@RequestMapping(value="/admin/category/add", method=RequestMethod.POST)
+	public String categoryAdd(@PathVariable("id") String userId, CategoryVo categoryVo) {
+		System.out.println(categoryVo);
+		System.out.println("category add ");
+		return "redirect:/"+ userId +"/admin/category";
 	}
 	
 	@RequestMapping(value="/admin/category/delete", method=RequestMethod.GET)

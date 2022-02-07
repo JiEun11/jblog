@@ -19,4 +19,11 @@
 			SELECT no,title,contents,DATE_FORMAT(reg_date, "%Y/%m/%d %H:%i:%s") AS regDate, category_no AS categoryNo FROM post WHERE no=#{no };
 		]]>
 	</select>
+	
+	<select id="countByNo" parameterType="long" resultType="integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM post WHERE no=#{no };
+		]]>
+	</select>
+	
 </mapper>

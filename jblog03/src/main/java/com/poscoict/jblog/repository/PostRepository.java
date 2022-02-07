@@ -29,4 +29,8 @@ public class PostRepository {
 		return sqlSession.selectOne("post.findOneByNo", no);
 	}
 	
+	public Integer countByNo(Long no) {
+		return sqlSession.selectOne("post.countByNo",no);
+	}
+	
 }
