@@ -161,6 +161,7 @@ public class BlogController {
 	
 	@RequestMapping(value="/admin/category/add", method=RequestMethod.POST)
 	public String categoryAdd(@PathVariable("id") String userId, CategoryVo categoryVo, Model model) {
+	
 		categoryVo.setBlogId(userId); 
 		categoryVo.setPostCnt((long)0);
 		System.out.println("category add " + categoryVo);
@@ -172,20 +173,34 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/admin/category/delete/{no}", method=RequestMethod.GET)
-	public String categoryDelete(@PathVariable("id") String userId,
+	public String categoryDelete(HttpSession session, @PathVariable("id") String userId,
 				@PathVariable(value="no") Long categoryNo) {
+		/* access control */
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser==null) {
+			return "redirect:/";
+		}
 		categoryService.deleteCategory(categoryNo);
 		return "redirect:/"+ userId +"/admin/category";
 	}
 	
 	@RequestMapping(value="/admin/write", method=RequestMethod.GET)
-	public String write() {
+	public String write(HttpSession session, @PathVariable("id") String userId,Model model) {
+		/* access control */
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser==null) {
+			return "redirect:/";
+		}
+		List<CategoryVo> cateList = categoryService.getCategory(userId);
+		BlogVo blogVo = blogService.getBlog(authUser.getId());
+		model.addAttribute("cateList",cateList);
+		model.addAttribute("blogVo",blogVo);
 		return "/blog/blog-admin-write";
 	}
 	
 	@RequestMapping(value="/admin/write", method=RequestMethod.POST)
-	public String writePost() {
-		return "/blog/blog-admin-write";
+	public String writePost(@PathVariable("id") String userId) {
+		return "redirect:/";
 	}
 	
 }
