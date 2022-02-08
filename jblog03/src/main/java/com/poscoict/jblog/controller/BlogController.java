@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +43,7 @@ public class BlogController {
 
 	
 	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
-	public String main(@PathVariable("id") String id,
+	public String main(@PathVariable("id") String userId,
 						@PathVariable("pathNo1") Optional<Long> pathNo1,
 						@PathVariable("pathNo2") Optional<Long> pathNo2,
 						Model model) {
@@ -56,23 +54,23 @@ public class BlogController {
 		List<PostVo> postList = null;
 		PostVo postOne = null;
 		
-		BlogVo blogVo = blogService.getBlog(id);
-		System.out.println("blogVo : " + blogVo);
-		if(blogVo==null) {
-			return "redirect:/";	// 없는 id로 path 입력 시 메인으로 
-		}
+//		BlogVo blogVo = blogService.getBlog(id);
+		
+//		if(blogVo==null) {
+//			return "redirect:/";	// 없는 id로 path 입력 시 메인으로 
+//		}
 		/* 여기까지 왔다는 건 id있다는 얘기이므로 category List 추출 */
-		cateList = categoryService.getCategory(id);	 
+		cateList = categoryService.getCategory(userId);	 
 		System.out.println("cateList : " + cateList );
+		
 		if(pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
 			postNo = pathNo2.get();
-		}
-		
-		if(pathNo1.isPresent()) {
+		}else if(pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
+			
 		}
-		
+	
 		/* categoryNo값으로 postList 부르기 */
 		postList = postService.getPostAll(categoryNo);	
 		if(postList.isEmpty()) {
@@ -91,7 +89,7 @@ public class BlogController {
 			System.out.println("postOne 후 : " + postOne);
 		}
 
-		model.addAttribute("blogVo", blogVo);
+//		model.addAttribute("blogVo", blogVo);
 		map.put("cateList", cateList);
 		map.put("postList", postList);
 		map.put("postOne", postOne);
@@ -102,12 +100,13 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
-	public String basic(@PathVariable("id") String userId, BlogVo blogVo, Model model) {
+	public String basic(@PathVariable("id") String userId) {
 		
-		blogVo = blogService.getBlog(userId);
-		System.out.println(blogVo);
-		
-		model.addAttribute("blogVo", blogVo);
+//		blogVo = blogService.getBlog(userId);
+//		System.out.println(blogVo);
+//		
+//		model.addAttribute("blogVo", blogVo);
+//		System.out.println();
 		return "/blog/blog-admin-basic";
 	}
 	
@@ -126,18 +125,18 @@ public class BlogController {
 		}
 		blogService.updateBlog(blogVo);
 		System.out.println(".>>>>>>>>>>>> blogVo : "+blogVo);
-		model.addAttribute("blogVo", blogVo);
+//		model.addAttribute("blogVo", blogVo);
 		return "redirect:/"+userId+"/admin/basic";
 	}
 	
 	@Auth
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
-	public String category(@PathVariable("id") String userId,Model model,BlogVo blogVo) {
+	public String category(@PathVariable("id") String userId, BlogVo blogVo, Model model) {
 		
-		blogVo = blogService.getBlog(userId);
+//		blogVo = blogService.getBlog(userId);
 		
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
-		model.addAttribute("blogVo", blogVo);
+//		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("cateList", cateList);
 		
 		return "/blog/blog-admin-category";
@@ -170,9 +169,9 @@ public class BlogController {
 	public String write(@PathVariable("id") String userId, Model model) {
 		
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
-		BlogVo blogVo = blogService.getBlog(userId);
+//		BlogVo blogVo = blogService.getBlog(userId);
 		model.addAttribute("cateList",cateList);
-		model.addAttribute("blogVo",blogVo);
+//		model.addAttribute("blogVo",blogVo);
 		return "/blog/blog-admin-write";
 	}
 	

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.poscoict.jblog.vo.UserVo;
+
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
@@ -42,7 +44,25 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(request.getContextPath()+"/user/login");
 			return false;
 		}
-	
+		
+		// 7. session이 존재하면 유효한 User인지 확인
+		UserVo authUser = (UserVo)session.getAttribute("authuser");
+		if(authUser == null) {
+			response.sendRedirect(request.getContextPath() + "/user/login");
+			return false;
+		}
+		
+		// 8. 권한(Authorization) 체크를 위해서 현재 페이지의 blogId(userId)를 확인 
+		String RequestURI = request.getRequestURI();	// /jblog03/je/admin/basic
+		String contextPath = request.getContextPath(); 	// /jblog03
+		String command = RequestURI.substring(contextPath.length());	// /je/admin/basic
+		String userId = command.split("/")[1];	// je
+		
+		if(!userId.equals(authUser.getId())) {
+			System.out.println("현재 페이지의 blogId와 로그인 하신 userId가 다릅니다.");
+			response.sendRedirect(request.getContextPath() + "/"+userId);
+			return false;
+		}
 		// 접근 허가 
 		return true;
 	}

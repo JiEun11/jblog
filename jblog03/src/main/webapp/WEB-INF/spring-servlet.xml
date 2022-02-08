@@ -31,17 +31,36 @@
 
 	<!-- Interceptors -->
 	<mvc:interceptors>
+		<!-- Login Interceptor -->
 		<mvc:interceptor>
 			<mvc:mapping path="/user/login" />
 			<bean class="com.poscoict.jblog.security.LoginInterceptor" />
 		</mvc:interceptor>
 		
+		<!-- Logout Interceptor -->
 		<mvc:interceptor>
 			<mvc:mapping path="/user/logout" />
 			<bean class="com.poscoict.jblog.security.LogoutInterceptor" />
 		</mvc:interceptor>
 		
+		<!-- Auth Interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/user/login"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.poscoict.jblog.security.AuthInterceptor"></bean>
+		</mvc:interceptor>
 		
+		<!-- Blog Interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/user/**"/>
+			<mvc:exclude-mapping path="/main/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.poscoict.jblog.interceptor.BlogInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<!-- mvc url-resource mapping -->
