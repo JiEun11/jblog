@@ -30,7 +30,20 @@
 	</bean>
 
 	<!-- Interceptors -->
-
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/login" />
+			<bean class="com.poscoict.jblog.security.LoginInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.poscoict.jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+		
+		
+	</mvc:interceptors>
+	
 	<!-- mvc url-resource mapping -->
 	<mvc:resources mapping="/assets/upload-images/**" location="file:/Users/bella/posco/upload-images/" />
 
