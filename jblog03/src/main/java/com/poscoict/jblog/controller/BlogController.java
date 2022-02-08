@@ -199,8 +199,11 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/admin/write", method=RequestMethod.POST)
-	public String writePost(@PathVariable("id") String userId) {
-		return "redirect:/";
+	public String writePost(@PathVariable("id") String userId,
+							PostVo postVo) {
+		System.out.println("postVo : " + postVo);
+		postService.addPost(postVo);
+		return "redirect:/"+userId+"/admin/basic";
 	}
 	
 }

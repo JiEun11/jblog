@@ -32,5 +32,10 @@ public class PostRepository {
 	public Integer countByNo(Long no) {
 		return sqlSession.selectOne("post.countByNo",no);
 	}
+
+	public int insertPost(PostVo postVo) {
+		
+		return sqlSession.insert("post.insert",postVo);
+	}
 	
 }

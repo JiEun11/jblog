@@ -36,5 +36,9 @@ public class PostService {
 		return postCntList;
 	}
 	
+	public boolean addPost(PostVo postVo) {
+		return postRepository.insertPost(postVo)==1;
+	}
+	
 	
 }

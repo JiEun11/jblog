@@ -25,16 +25,16 @@
 			      			<td class="t">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="title">
-				      			<select name="category">
-				      				<c:forEach items="${cateList }" var="cateVo" varStatus="status">
-				      					<option>${cateVo.name }</option>
-				      				</c:forEach>
-				      			</select>
+				      			<select name="categoryNo">
+				      			<c:forEach items="${cateList }" var="cateVo" varStatus="status">	
+				      					<option value="${cateVo.no }">${cateVo.name }</option>
+				      			</c:forEach>	
+				      			</select>		      			
 				      		</td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">내용</td>
-			      			<td><textarea name="content"></textarea></td>
+			      			<td><textarea name="contents"></textarea></td>
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>
