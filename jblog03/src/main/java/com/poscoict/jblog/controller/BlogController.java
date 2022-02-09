@@ -85,7 +85,13 @@ public class BlogController {
 		if(postOne==null) {
 			// 없는 postNo였다면 제일 상단 post 보여주기 
 			System.out.println("postOne 전 : " + postOne);
-			postOne = postService.getRecentOne(postList.get(0).getCategoryNo());
+			if(postList.isEmpty()) {
+				postOne = new PostVo();
+				postOne.setTitle("어서오세요");
+				postOne.setContents("첫 글입니다.");
+			}else {
+				postOne = postService.getRecentOne(postList.get(0).getCategoryNo());				
+			}
 			System.out.println("postOne 후 : " + postOne);
 		}
 

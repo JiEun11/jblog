@@ -16,7 +16,7 @@ public class BlogRepository {
 	public int insert(UserVo userVo) {
 		BlogVo blogVo = new BlogVo();
 		blogVo.setTitle(userVo.getName()+"님의 블로그");
-		blogVo.setLogo("/images/202214102733647.jpeg");
+		blogVo.setLogo("/assets/upload-images/202214102733647.jpeg");
 		blogVo.setUserId(userVo.getId());
 		return sqlSession.insert("blog.insert", blogVo);
 	}

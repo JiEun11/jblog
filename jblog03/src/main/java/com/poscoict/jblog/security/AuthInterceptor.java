@@ -40,14 +40,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		// 6. @Auth가 적용 되어 있기 때문에 인증(Authentication)여부 확인
 		HttpSession session = request.getSession();
+		System.out.println(">>>>>>>>>>>> session: " + session );
 		if(session == null) {
 			response.sendRedirect(request.getContextPath()+"/user/login");
 			return false;
 		}
 		
 		// 7. session이 존재하면 유효한 User인지 확인
-		UserVo authUser = (UserVo)session.getAttribute("authuser");
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		System.out.println("authUser??????? " + authUser);
 		if(authUser == null) {
+			System.out.println("authUser null이야? 그렇대 ");
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
