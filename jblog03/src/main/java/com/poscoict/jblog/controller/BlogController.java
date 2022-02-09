@@ -131,12 +131,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
-	public String category(@PathVariable("id") String userId, BlogVo blogVo, Model model) {
-		
-//		blogVo = blogService.getBlog(userId);
+	public String category(@PathVariable("id") String userId,
+			Model model
+							) {
+		// post들으로 넘기는 데이터들 or url로 넘기는 데이터들을 받는 경우 
 		
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
-//		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("cateList", cateList);
 		
 		return "/blog/blog-admin-category";
