@@ -10,12 +10,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.poscoict.config.web.MvcConfig;
+import com.poscoict.config.web.SecurityConfig;
 import com.poscoict.jblog.interceptor.BlogInterceptor;
 
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan({"com.poscoict.jblog.controller", "com.poscoict.jblog.exception"})
-@Import({MvcConfig.class})
+@Import({MvcConfig.class, SecurityConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
