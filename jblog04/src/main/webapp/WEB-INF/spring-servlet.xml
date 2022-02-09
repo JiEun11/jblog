@@ -9,14 +9,14 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<!-- auto proxy -->
-	<aop:aspectj-autoproxy />
+	<!-- auto proxy 
+	<aop:aspectj-autoproxy /> -->
 
 	<!-- Message Convertor, Handler Mapping, Validator 설정 및 생성 -->
 	<mvc:annotation-driven />
 
-	<!-- Servlet Container(tomcat)의 DefaultServlet 위임(delegate) Hadler -->
-	<mvc:default-servlet-handler />
+	<!-- Servlet Container(tomcat)의 DefaultServlet 위임(delegate) Hadler 
+	<mvc:default-servlet-handler /> -->
 
 	<!-- 멀티파트 리졸버 -->
 	<bean id="multipartResolver"
@@ -52,7 +52,7 @@
 			<bean class="com.poscoict.jblog.security.AuthInterceptor"></bean>
 		</mvc:interceptor>
 		
-		<!-- Blog Interceptor -->
+		<!-- Blog Interceptor 
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/"/>
@@ -60,7 +60,7 @@
 			<mvc:exclude-mapping path="/main/**"/>
 			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="com.poscoict.jblog.interceptor.BlogInterceptor"></bean>
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 	</mvc:interceptors>
 	
 	<!-- mvc url-resource mapping -->
@@ -68,17 +68,17 @@
 
 	<!-- MessageSource -->
 	
-	<!-- ViewResolver -->
+	<!-- ViewResolver 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean> -->
 
 	<context:annotation-config />
-	<context:component-scan
-		base-package="com.poscoict.jblog.controller, com.poscoict.jblog.exception" />
+	<!-- <context:component-scan
+		base-package="com.poscoict.jblog.controller, com.poscoict.jblog.exception" /> -->
 
 </beans>
