@@ -19,38 +19,42 @@
 	<mvc:default-servlet-handler /> -->
 
 	<!-- 멀티파트 리졸버 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 최대업로드 가능한 바이트크기 -->
-		<property name="maxUploadSize" value="52428800" />
+	<!-- <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+		<!-- 최대업로드 가능한 바이트크기 
+		<property name="maxUploadSize" value="52428800" /> -->
 		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
 		<!-- property name="maxInMemorySize" value="52428800" / -->
-		<!-- defaultEncoding -->
+		<!-- defaultEncoding 
 		<property name="defaultEncoding" value="utf-8" />
-	</bean>
+	</bean> -->
 
-	<!-- Interceptors -->
-	<mvc:interceptors>
-		<!-- Login Interceptor -->
+	<!-- mvc url-resource mapping 
+	<mvc:resources mapping="/assets/upload-images/**" location="file:/Users/bella/posco/upload-images/" />
+	-->
+	
+	<!-- Interceptors 
+	<mvc:interceptors> -->
+		<!-- Login Interceptor 
 		<mvc:interceptor>
 			<mvc:mapping path="/user/login" />
 			<bean class="com.poscoict.jblog.security.LoginInterceptor" />
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 		
-		<!-- Logout Interceptor -->
+		<!-- Logout Interceptor 
 		<mvc:interceptor>
 			<mvc:mapping path="/user/logout" />
 			<bean class="com.poscoict.jblog.security.LogoutInterceptor" />
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 		
-		<!-- Auth Interceptor -->
+		<!-- Auth Interceptor 
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/user/login"/>
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="com.poscoict.jblog.security.AuthInterceptor"></bean>
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 		
 		<!-- Blog Interceptor 
 		<mvc:interceptor>
@@ -60,11 +64,8 @@
 			<mvc:exclude-mapping path="/main/**"/>
 			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="com.poscoict.jblog.interceptor.BlogInterceptor"></bean>
-		</mvc:interceptor> -->
-	</mvc:interceptors>
-	
-	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/assets/upload-images/**" location="file:/Users/bella/posco/upload-images/" />
+		</mvc:interceptor> 
+	</mvc:interceptors> -->
 
 	<!-- MessageSource -->
 	
