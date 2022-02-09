@@ -37,6 +37,15 @@ public class UserController {
 		return "user/login";
 	}
 
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public void loginInterceptor() {
+		
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public void logout() {
+		
+	}
 	
 //	@RequestMapping("/logout")
 //	public String logout(HttpSession session) {
