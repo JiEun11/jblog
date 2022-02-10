@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@PropertySource("classpath:com/poscoict/jblog/config/web/fileupload.properties")
+@PropertySource({"classpath:com/poscoict/jblog/config/web/fileupload.properties","classpath:com/poscoict/jblog/config/web/assets.properties"})
 public class FileuploadConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
@@ -37,6 +37,17 @@ public class FileuploadConfig extends WebMvcConfigurerAdapter {
 		.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
 		.addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 		
+		registry
+		.addResourceHandler(env.getProperty("assetsCss.resourceMapping"))
+		.addResourceLocations("classpath:"+env.getProperty("assetsCss.uploadLocation"));
+		
+		registry
+		.addResourceHandler(env.getProperty("assetsImages.resourceMapping"))
+		.addResourceLocations("classpath:"+env.getProperty("assetsImages.uploadLocation"));
+		
+		registry
+		.addResourceHandler(env.getProperty("assetsJs.resourceMapping"))
+		.addResourceLocations("classpath:"+env.getProperty("assetsJs.uploadLocation"));
 	}
 	
 	
