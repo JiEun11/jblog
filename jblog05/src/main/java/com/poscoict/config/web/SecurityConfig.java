@@ -27,6 +27,7 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 		return new LogoutInterceptor();
 	}
 	
+	@Bean
 	public HandlerInterceptor authInterceptor() {
 		return new AuthInterceptor();
 	}
