@@ -101,7 +101,7 @@ public class BlogController {
 		map.put("postOne", postOne);
 		model.addAttribute("map",map);
 
-		return "/blog/blog-main";
+		return "blog/blog-main";
 	}
 	
 	@Auth
@@ -113,7 +113,7 @@ public class BlogController {
 //		
 //		model.addAttribute("blogVo", blogVo);
 //		System.out.println();
-		return "/blog/blog-admin-basic";
+		return "blog/blog-admin-basic";
 	}
 	
 	@Auth
@@ -145,7 +145,7 @@ public class BlogController {
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
 		model.addAttribute("cateList", cateList);
 		
-		return "/blog/blog-admin-category";
+		return "blog/blog-admin-category";
 	}
 	
 	@RequestMapping(value="/admin/category/add", method=RequestMethod.POST)
@@ -178,7 +178,7 @@ public class BlogController {
 //		BlogVo blogVo = blogService.getBlog(userId);
 		model.addAttribute("cateList",cateList);
 //		model.addAttribute("blogVo",blogVo);
-		return "/blog/blog-admin-write";
+		return "blog/blog-admin-write";
 	}
 	
 	@RequestMapping(value="/admin/write", method=RequestMethod.POST)
