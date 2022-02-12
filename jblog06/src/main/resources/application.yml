@@ -1,0 +1,85 @@
+spring:
+   profiles:
+      active: dev
+---
+# common : spring boot configuration
+spring:
+   # devtools 설정 - live reload
+   livereload:
+      enabled: true
+      
+   # mvc 설정
+   mvc:
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp
+   # message resource(Internationalization)
+   messages:
+      always-message-format: true
+      basename: messages/messages_ko
+      encoding: UTF-8
+      
+   #multipart
+   multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+   #aop(@EnableAspectJAutoProxy)
+   aop:
+      auto: true
+      proxy-target-class: true
+---
+# dev profile : spring boot configuration
+spring:
+   config:
+      activate:
+         on-profile: dev
+   # data source
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://192.168.0.68:3307/webdb?characterEncoding=UTF-8&serverTimezone=UTC
+      username: webdb
+      password: webdb
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
+---
+# production profile : spring boot configuration
+spring:
+   config:
+      activate:
+         on-profile: production
+   
+   # data source 
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://211.45.3.5:3307/webdb?characterEncoding=UTF-8&serverTimezone=UTC
+      username: webdb
+      password: webdb@dfidjfaid
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
+
+---
+# server 
+server:
+   port: 8080
+   servlet:
+      context-path: /jblog06
+      encoding:
+         charset: utf-8
+         enabled: true
+         forced: false
+         forced-request: false
+         forced-response: false
+     
+---
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+   
+---
+# logging 
+logging:
+   config: classpath:logback.xml
