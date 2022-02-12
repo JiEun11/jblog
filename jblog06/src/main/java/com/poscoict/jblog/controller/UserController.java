@@ -39,7 +39,7 @@ public class UserController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public void loginInterceptor() {
-		
+		System.out.println("login 왜 터져");
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
