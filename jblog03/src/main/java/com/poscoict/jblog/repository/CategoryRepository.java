@@ -1,6 +1,8 @@
 package com.poscoict.jblog.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,11 @@ public class CategoryRepository {
 		return sqlSession.selectList("category.findAllById", id);
 	}
 	
-	public List<CategoryVo> checkCateExist(Long no){
-		return sqlSession.selectList("category.findAllByNo", no);
+	public List<CategoryVo> checkCateExist(String userId,Long no){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("blogId", userId);
+		map.put("categoryNo", no);
+		return sqlSession.selectList("category.findAllByNo", map);
 	}
 	
 	public Long getMaxNo(String id) {

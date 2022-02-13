@@ -65,10 +65,12 @@ public class BlogController {
 		if(pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
 			postNo = pathNo2.get();
+			System.out.println("pathNo2 있을 때 categoryNo: " + categoryNo + ", postNo: " + postNo);
 		}else if(pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
+			System.out.println("pathNo1만 있을 때 categoryNo: " + categoryNo + ", postNo: " + postNo);
 		}
-		
+		System.out.println("아무것도 없을 때 categoryNo: " + categoryNo + ", postNo: " + postNo);
 		Map<String,Object> map = blogService.getBlogMain(userId, categoryNo, postNo);
 //		/* categoryNo값으로 postList 부르기 */
 //		postList = postService.getPostAll(categoryNo);	

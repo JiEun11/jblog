@@ -14,9 +14,9 @@
 		]]>
 	</select>
 	
-	<select id="findAllByNo" parameterType="long" resultType="categoryvo">
+	<select id="findAllByNo" parameterType="map" resultType="categoryvo">
 		<![CDATA[
-			SELECT no, name,description,blog_id FROM category WHERE no=#{categoryNo }
+			SELECT no, name,description,blog_id FROM category WHERE blog_id=#{blogId } AND no=#{categoryNo }
 		]]>
 	</select>
 	
