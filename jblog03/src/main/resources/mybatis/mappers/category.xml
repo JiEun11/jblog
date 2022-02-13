@@ -14,6 +14,18 @@
 		]]>
 	</select>
 	
+	<select id="findAllByNo" parameterType="long" resultType="categoryvo">
+		<![CDATA[
+			SELECT no, name,description,blog_id FROM category WHERE no=#{categoryNo }
+		]]>
+	</select>
+	
+	<select id="findMaxNoById" parameterType="string" resultType="long">
+		<![CDATA[
+			SELECT MAX(no) FROM category WHERE blog_id=#{blogId }
+		]]>
+	</select>
+	
 	<insert id="addCategory" parameterType="categoryvo">
 		<![CDATA[
 			INSERT INTO category VALUES(null, #{name }, #{description }, #{blogId } )

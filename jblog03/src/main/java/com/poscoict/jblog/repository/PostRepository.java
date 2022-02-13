@@ -29,8 +29,8 @@ public class PostRepository {
 		return sqlSession.selectOne("post.findOneByNo", no);
 	}
 	
-	public Integer countByNo(Long no) {
-		return sqlSession.selectOne("post.countByNo",no);
+	public Long findMaxNoByNo(Long categoryNo) {
+		return sqlSession.selectOne("post.findMaxNoByNo", categoryNo);
 	}
 
 	public int insertPost(PostVo postVo) {

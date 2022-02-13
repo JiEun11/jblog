@@ -49,10 +49,9 @@ public class BlogController {
 						Model model) {
 		Long categoryNo = 0L;
 		Long postNo = 0L;
-		Map<String,Object> map = new HashMap<String, Object>();
-		List<CategoryVo> cateList = null;
-		List<PostVo> postList = null;
-		PostVo postOne = null;
+//		List<CategoryVo> cateList = null;
+//		List<PostVo> postList = null;
+//		PostVo postOne = null;
 		
 //		BlogVo blogVo = blogService.getBlog(id);
 		
@@ -60,45 +59,45 @@ public class BlogController {
 //			return "redirect:/";	// 없는 id로 path 입력 시 메인으로 
 //		}
 		/* 여기까지 왔다는 건 id있다는 얘기이므로 category List 추출 */
-		cateList = categoryService.getCategory(userId);	 
-		System.out.println("cateList : " + cateList );
+//		cateList = categoryService.getCategory(userId);	 
+//		System.out.println("cateList : " + cateList );
 		
 		if(pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
 			postNo = pathNo2.get();
 		}else if(pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
-			
-		}
-	
-		/* categoryNo값으로 postList 부르기 */
-		postList = postService.getPostAll(categoryNo);	
-		if(postList.isEmpty()) {
-			System.out.println("postList 전 :" + postList);
-			// 없는 category번호였다면 제일 상단 카테고리번호로 postList 부르기 
-			postList = postService.getPostAll(cateList.get(0).getNo());
-			System.out.println("postList 가져온 후 :" + postList);
 		}
 		
-		/* postNo 값으로 post 한 개 부르기 */
-		postOne = postService.getOnePost(postNo);
-		if(postOne==null) {
-			// 없는 postNo였다면 제일 상단 post 보여주기 
-			System.out.println("postOne 전 : " + postOne);
-			if(postList.isEmpty()) {
-				postOne = new PostVo();
-				postOne.setTitle("어서오세요");
-				postOne.setContents("첫 글입니다.");
-			}else {
-				postOne = postService.getRecentOne(postList.get(0).getCategoryNo());				
-			}
-			System.out.println("postOne 후 : " + postOne);
-		}
-
-//		model.addAttribute("blogVo", blogVo);
-		map.put("cateList", cateList);
-		map.put("postList", postList);
-		map.put("postOne", postOne);
+		Map<String,Object> map = blogService.getBlogMain(userId, categoryNo, postNo);
+//		/* categoryNo값으로 postList 부르기 */
+//		postList = postService.getPostAll(categoryNo);	
+//		if(postList.isEmpty()) {
+//			System.out.println("postList 전 :" + postList);
+//			// 없는 category번호였다면 제일 상단 카테고리번호로 postList 부르기 
+//			postList = postService.getPostAll(cateList.get(0).getNo());
+//			System.out.println("postList 가져온 후 :" + postList);
+//		}
+//		
+//		/* postNo 값으로 post 한 개 부르기 */
+//		postOne = postService.getOnePost(postNo);
+//		if(postOne==null) {
+//			// 없는 postNo였다면 제일 상단 post 보여주기 
+//			System.out.println("postOne 전 : " + postOne);
+//			if(postList.isEmpty()) {
+//				postOne = new PostVo();
+//				postOne.setTitle("어서오세요");
+//				postOne.setContents("첫 글입니다.");
+//			}else {
+//				postOne = postService.getRecentOne(postList.get(0).getCategoryNo());				
+//			}
+//			System.out.println("postOne 후 : " + postOne);
+//		}
+//
+////		model.addAttribute("blogVo", blogVo);
+//		map.put("cateList", cateList);
+//		map.put("postList", postList);
+//		map.put("postOne", postOne);
 		model.addAttribute("map",map);
 
 		return "blog/blog-main";

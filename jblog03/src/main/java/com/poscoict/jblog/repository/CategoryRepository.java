@@ -1,7 +1,6 @@
 package com.poscoict.jblog.repository;
 
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,14 @@ public class CategoryRepository {
 
 	public List<CategoryVo> findAllById(String id) {
 		return sqlSession.selectList("category.findAllById", id);
+	}
+	
+	public List<CategoryVo> checkCateExist(Long no){
+		return sqlSession.selectList("category.findAllByNo", no);
+	}
+	
+	public Long getMaxNo(String id) {
+		return sqlSession.selectOne("category.findMaxNoById",id);
 	}
 	
 	public int addCategory(CategoryVo categoryVo) {

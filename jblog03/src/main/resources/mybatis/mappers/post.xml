@@ -20,6 +20,12 @@
 		]]>
 	</select>
 	
+	<select id="findMaxNoByNo" parameterType="long" resultType="long">
+		<![CDATA[
+			SELECT MAX(no) FROM post WHERE category_no =#{categoryNo };
+		]]>
+	</select>
+	
 	<insert id="insert" parameterType="postvo">
 		<![CDATA[
 			INSERT INTO post values(null,#{title },#{contents }, now(), #{categoryNo });
