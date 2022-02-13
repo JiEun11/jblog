@@ -9,7 +9,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.poscoict.jblog.config.AppConfig;
 import com.poscoict.jblog.config.WebConfig;
 
-public class MySiteWebAPplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class MySiteWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {

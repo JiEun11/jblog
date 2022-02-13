@@ -25,15 +25,15 @@ public class GlobalExceptionHandler {
 		System.out.println(errors.toString());
 		LOGGER.error(errors.toString());
 
-		errors.toString();
-		model.addAttribute("exception", errors.toString());
-
-		// 404 에러 처리
 		// 404 Error 처리
 		if (e instanceof NoHandlerFoundException) {
 			return "error/404";
 		}
-		
+		errors.toString();
+		model.addAttribute("exception", errors.toString());
+
+		// 404 에러 처리
+
 		// 2. 사과 페이지 (HTML 응답, 정상 종료)
 		return "error/exception";
 
