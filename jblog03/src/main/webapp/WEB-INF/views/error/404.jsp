@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>500 errror</title>
+<title>404 errror</title>
 </head>
 <body>
 	<h1>Not Found(404) </h1>

@@ -1,6 +1,5 @@
 package com.poscoict.jblog.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -49,18 +48,6 @@ public class BlogController {
 						Model model) {
 		Long categoryNo = 0L;
 		Long postNo = 0L;
-//		List<CategoryVo> cateList = null;
-//		List<PostVo> postList = null;
-//		PostVo postOne = null;
-		
-//		BlogVo blogVo = blogService.getBlog(id);
-		
-//		if(blogVo==null) {
-//			return "redirect:/";	// 없는 id로 path 입력 시 메인으로 
-//		}
-		/* 여기까지 왔다는 건 id있다는 얘기이므로 category List 추출 */
-//		cateList = categoryService.getCategory(userId);	 
-//		System.out.println("cateList : " + cateList );
 		
 		if(pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
@@ -72,35 +59,8 @@ public class BlogController {
 		}
 		System.out.println("아무것도 없을 때 categoryNo: " + categoryNo + ", postNo: " + postNo);
 		Map<String,Object> map = blogService.getBlogMain(userId, categoryNo, postNo);
-//		/* categoryNo값으로 postList 부르기 */
-//		postList = postService.getPostAll(categoryNo);	
-//		if(postList.isEmpty()) {
-//			System.out.println("postList 전 :" + postList);
-//			// 없는 category번호였다면 제일 상단 카테고리번호로 postList 부르기 
-//			postList = postService.getPostAll(cateList.get(0).getNo());
-//			System.out.println("postList 가져온 후 :" + postList);
-//		}
-//		
-//		/* postNo 값으로 post 한 개 부르기 */
-//		postOne = postService.getOnePost(postNo);
-//		if(postOne==null) {
-//			// 없는 postNo였다면 제일 상단 post 보여주기 
-//			System.out.println("postOne 전 : " + postOne);
-//			if(postList.isEmpty()) {
-//				postOne = new PostVo();
-//				postOne.setTitle("어서오세요");
-//				postOne.setContents("첫 글입니다.");
-//			}else {
-//				postOne = postService.getRecentOne(postList.get(0).getCategoryNo());				
-//			}
-//			System.out.println("postOne 후 : " + postOne);
-//		}
-//
-////		model.addAttribute("blogVo", blogVo);
-//		map.put("cateList", cateList);
-//		map.put("postList", postList);
-//		map.put("postOne", postOne);
-		model.addAttribute("map",map);
+
+		model.addAllAttributes(map);
 
 		return "blog/blog-main";
 	}
@@ -108,12 +68,7 @@ public class BlogController {
 	@Auth
 	@RequestMapping(value="/admin/basic", method=RequestMethod.GET)
 	public String basic(@PathVariable("id") String userId) {
-		
-//		blogVo = blogService.getBlog(userId);
-//		System.out.println(blogVo);
-//		
-//		model.addAttribute("blogVo", blogVo);
-//		System.out.println();
+
 		return "blog/blog-admin-basic";
 	}
 	
@@ -132,17 +87,14 @@ public class BlogController {
 		}
 		blogService.updateBlog(blogVo);
 		System.out.println(".>>>>>>>>>>>> blogVo : "+blogVo);
-//		model.addAttribute("blogVo", blogVo);
 		return "redirect:/"+userId+"/admin/basic";
 	}
 	
 	@Auth
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
 	public String category(@PathVariable("id") String userId,
-			Model model
-							) {
+			Model model) {
 		// post들으로 넘기는 데이터들 or url로 넘기는 데이터들을 받는 경우 
-		
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
 		model.addAttribute("cateList", cateList);
 		
@@ -176,9 +128,7 @@ public class BlogController {
 	public String write(@PathVariable("id") String userId, Model model) {
 		
 		List<CategoryVo> cateList = categoryService.getCategory(userId);
-//		BlogVo blogVo = blogService.getBlog(userId);
 		model.addAttribute("cateList",cateList);
-//		model.addAttribute("blogVo",blogVo);
 		return "blog/blog-admin-write";
 	}
 	

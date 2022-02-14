@@ -57,8 +57,8 @@ public class BlogService {
 		// 4. postNo 값으로 한 개의 post 정보 가져오기
 		PostVo postOne = postRepository.findOneByNo(postNo);
 		
-		// 5. category번호만 누른 경우 제일 최신 글로 보여주기 
-		if (postNo == null) {
+		// 5. category번호만 누른 경우 & 없는 글 번호인 경우 제일 최신 글로 보여주기 
+		if (postNo == null || postOne == null) {
 			postOne = postRepository.findOneByNo(categoryRepository.getMaxNo(userId));
 		}
 		System.out.println("postOne 존재? : " + postOne);
